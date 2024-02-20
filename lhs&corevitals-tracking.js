@@ -69,10 +69,60 @@ function setUpQueryDesktop(site) {
     return query;
 }
 
+const CrUXApiUtil = {};
+// Get your CrUX API key at https://goo.gle/crux-api-key.
+CrUXApiUtil.API_KEY = 'AIzaSyCvoXFk31F4fCScVaoDoZiZ-J2pKU7fTHw';
+CrUXApiUtil.API_ENDPOINT = `https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=${CrUXApiUtil.API_KEY}`;
+CrUXApiUtil.query = async function (requestBody) {
+  console.log(requestBody);
+  try {
+    const response =  await fetch(CrUXApiUtil.API_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify(requestBody)
+    });
+    const data = await response.json();
+    assessCoreWebVitals(data);
+  } catch (error) {
+    console.error('CrUXApiUtil.query failed', error);
+  } 
+};
+
+function assessCoreWebVitals(response) {
+    const CORE_WEB_VITALS = [
+        'largest_contentful_paint',
+        'first_input_delay',
+        'cumulative_layout_shift'
+      ];
+      CORE_WEB_VITALS.forEach((metric) => {
+        const result = JSON.stringify(response.record.metrics[metric]);
+        if (!result) {
+          console.log(`No data for ${metric}`);
+          return;
+        } else {
+            const p75 = JSON.stringify(response.record.metrics[metric].percentiles.p75);
+            const threshold = JSON.stringify(response.record.metrics[metric].histogram[0].end);
+            console.log(metric, ":" ,"threshold = ", threshold, "Percentile 75% = ", p75);
+        }
+      });
+}
+
+
+async function cruxfunction() {
+    CrUXApiUtil.query({
+      origin: 'https://www.cunacouncils.org'
+    });
+  }
+
 async function mainfunction() {
     for (let i = 0; i <= (raw_data.length-1); i++) {
         if ((!raw_data[i].Company_Name) && (!raw_data[i].New_Relic_Enduser_URL)) { console.log("\n"); continue; }
-        (raw_data[i].New_Relic_Enduser_URL) ? await lhsrun(raw_data[i].New_Relic_Enduser_URL,raw_data[i].Company_Name) : console.log(raw_data[i].Company_Name+"##No New_Relic_Enduser_URL");
+        // (raw_data[i].New_Relic_Enduser_URL) ? await lhsrun(raw_data[i].New_Relic_Enduser_URL,raw_data[i].Company_Name) : console.log(raw_data[i].Company_Name+"##No New_Relic_Enduser_URL");
+        if (raw_data[i].New_Relic_Enduser_URL) {
+            await lhsrun(raw_data[i].New_Relic_Enduser_URL,raw_data[i].Company_Name);
+            await cruxfunction();
+        } else {
+            console.log(raw_data[i].Company_Name+"##No New_Relic_Enduser_URL");
+        }
     }
 }
 
