@@ -54,7 +54,7 @@ async function lhsrun(site, customer) {
 // Tracking LHS for Desktop
 
 function setUpQueryDesktop(site) {
-    const YOUR_API_KEY = "AIzaSyCwZkCTnraHXOjnCWuq2oxXJOE-ll1hzuI";
+    const YOUR_API_KEY = "Use your API Key";
     const api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
     if (!site.startsWith('http')){ site = "https://" + site; }
     const parameters = {
@@ -71,7 +71,7 @@ function setUpQueryDesktop(site) {
 
 const CrUXApiUtil = {};
 // Get your CrUX API key at https://goo.gle/crux-api-key.
-CrUXApiUtil.API_KEY = 'AIzaSyCvoXFk31F4fCScVaoDoZiZ-J2pKU7fTHw';
+CrUXApiUtil.API_KEY = 'Use your API Key';
 CrUXApiUtil.API_ENDPOINT = `https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=${CrUXApiUtil.API_KEY}`;
 CrUXApiUtil.query = async function (requestBody) {
   console.log(requestBody);
