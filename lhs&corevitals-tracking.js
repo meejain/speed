@@ -116,7 +116,6 @@ async function cruxfunction() {
 async function mainfunction() {
     for (let i = 0; i <= (raw_data.length-1); i++) {
         if ((!raw_data[i].Company_Name) && (!raw_data[i].New_Relic_Enduser_URL)) { console.log("\n"); continue; }
-        // (raw_data[i].New_Relic_Enduser_URL) ? await lhsrun(raw_data[i].New_Relic_Enduser_URL,raw_data[i].Company_Name) : console.log(raw_data[i].Company_Name+"##No New_Relic_Enduser_URL");
         if (raw_data[i].New_Relic_Enduser_URL) {
             await lhsrun(raw_data[i].New_Relic_Enduser_URL,raw_data[i].Company_Name);
             await cruxfunction();
