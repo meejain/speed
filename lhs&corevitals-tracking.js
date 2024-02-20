@@ -101,7 +101,7 @@ function assessCoreWebVitals(response) {
         } else {
             const p75 = JSON.stringify(response.record.metrics[metric].percentiles.p75);
             const threshold = JSON.stringify(response.record.metrics[metric].histogram[0].end);
-            console.log(metric, ":" ,"threshold = ", threshold, "Percentile 75% = ", p75);
+            console.log("Percentile 75% for ", metric, ":" ,"Threshold Value = ", threshold, "Current Value = ", p75);
         }
       });
 }
