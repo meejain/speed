@@ -35,7 +35,7 @@ async function lhsrun(site, customer) {
  // Tracking LHS for Mobile
 
  function setUpQueryMobile(site) {
-    const YOUR_API_KEY = "AIzaSyCwZkCTnraHXOjnCWuq2oxXJOE-ll1hzuI";
+    const YOUR_API_KEY = "Use your API Key";
     const api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
     if (!site.startsWith('http')){ site = "https://" + site; }
     const parameters = {
