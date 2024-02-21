@@ -35,7 +35,7 @@ async function fetchURL(url) {
 // Tracking LHS for Mobile
 
 function setUpQueryMobile(site) {
-  const YOUR_API_KEY = "Use Your API Key Here";
+  const YOUR_API_KEY = "USE_YOUR_API_KEY";
   const api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
   if (!site.startsWith('http')){ site = "https://" + site; }
   const parameters = {
@@ -54,7 +54,7 @@ function setUpQueryMobile(site) {
 // Tracking LHS for Desktop
 
 function setUpQueryDesktop(site) {
-  const YOUR_API_KEY = "Use Your API Key Here";
+  const YOUR_API_KEY = "USE_YOUR_API KEY";
   const api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
   if (!site.startsWith('http')){ site = "https://" + site; }
   const parameters = {
@@ -71,7 +71,7 @@ function setUpQueryDesktop(site) {
 
 const CrUXApiUtil = {};
 // Get your CrUX API key at https://goo.gle/crux-api-key.
-CrUXApiUtil.API_KEY = 'Use Your API Key Here';
+CrUXApiUtil.API_KEY = 'USE_YOUR_API_KEY';
 CrUXApiUtil.API_ENDPOINT = `https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=${CrUXApiUtil.API_KEY}`;
 CrUXApiUtil.query = async function (requestBody) {
 console.log(requestBody);
